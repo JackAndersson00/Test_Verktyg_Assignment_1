@@ -1,9 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">    
 <head>
-    <title>create</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device.width, initial-scale=1.0">
+    <title>Lägg till användare</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Add user</h1>
+    <div class="container">
+        <div class="header-container">
+            <h1>Lägg till användare</h1>
+            <a href="index.html">Gå hem</a>
+        </div>
+        
+        <form id="addUserForm">
+            <div class="form">
+                <label for="name">Namn:</label><br>
+                <input type="text" id="name" name="name" placeholder='"Namn Namnsson"'' required>
+            </div>
+            <div class="form">
+                <label for="userName">Användarnamn:</label><br>
+                <input type="text" id="userName" name="userName" placeholder='"Namne"'' required>
+            </div>
+            <div class="form">
+                <label for="age">Ålder:</label><br>
+                <input type="number" id="age" name="age" placeholder="Ange din ålder!" required>
+            </div>
+            <div class="form">
+                    <label for="bio">Om mig:</label><br>
+                    <textarea id="bio" name="bio" placeholder="Skriv lite om dig själv!"></textarea>
+            </div>
+            <button type="submit">Skapa</button>
+        </form>
+    </div>
 </body>
 </html>
