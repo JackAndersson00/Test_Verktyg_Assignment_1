@@ -10,27 +10,85 @@
     <div class="container">
         <div class="header-container">
             <h1>Create User</h1>
-            <a href="index.html">Home page</a>
+            <a href="index.html" title="Back to Home">Home page</a>
         </div>
         
         <form id="addUserForm">
             <div class="form">
-                <label for="name">Name:</label><br>
-                <input class="form-font" type="text" id="name" name="name" placeholder='"Name Namesson"'' required>
+                <label for="fname">First name:</label>
+                <input class="form-font" type="text" id="fname" name="fname" placeholder='"John"' required>
             </div>
+            <br>
             <div class="form">
-                <label for="userName">User Name:</label><br>
-                <input class="form-font" type="text" id="userName" name="userName" placeholder='"Name"'' required>
+                <label for="lname">Last name:</label>
+                <input class="form-font" type="text" id="lname" name="lname" placeholder='"Doe"'' required>
             </div>
+            <br>
             <div class="form">
-                <label for="age">Age:</label><br>
-                <input class="form-font" type="number" id="age" name="age" placeholder="Enter your age" required>
+                <label for="userName">Nickname:</label>
+                <input class="form-font" type="text" id="userName" name="userName" placeholder='"Jonny"'' required>
             </div>
+            <br>
+            <div class="form">
+                <label for="age">Age:</label>
+                <select class="form-font" name="age" id="age">
+                    <option value="placeholder" selected>Select age</option>
+                    <option value="option">18</option>
+                    <option value="option">19</option>
+                    <option value="option">20</option>
+                    <option value="option">21</option>
+                    <option value="option">22</option>
+                    <option value="option">23</option>
+                    <option value="option">24</option>
+                    <option value="option">25</option>
+                    <option value="option">25</option>
+                    <option value="option">27</option>
+                    <option value="option">28</option>
+                    <option value="option">29</option>
+                    <option value="option">30</option>
+                    <option value="option">31</option>
+                    <option value="option">32</option>
+                    <option value="option">33</option>
+                    <option value="option">34</option>
+                    <option value="option">35</option>
+                    <option value="option">36</option>  
+                    <option value="option">37</option>
+                    <option value="option">38</option>
+                    <option value="option">39</option>
+                    <option value="option">40</option>
+                    <option value="option">41</option>
+                    <option value="option">42</option>
+                    <option value="option">43</option>
+                    <option value="option">44</option>
+                    <option value="option">45</option>
+                    <option value="option">46</option>
+                    <option value="option">47</option>
+                    <option value="option">48</option>
+                    <option value="option">49</option>
+                    <option value="option">50</option>
+                    <option value="option">51</option>
+                    <option value="option">52</option>
+                    <option value="option">53</option>
+                    <option value="option">54</option>  
+                    <option value="option">55</option>
+                    <option value="option">56</option>
+                    <option value="option">57</option>
+                    <option value="option">58</option>
+                    <option value="option">59</option>
+                    <option value="option">60</option>
+                    <option value="option">61</option>
+                    <option value="option">62</option>
+                    <option value="option">63</option>
+                    <option value="option">64</option>
+                    <option value="option">65</option>
+                </select>
+            </div>
+            <br>
             <div class="form">
                 <label for="bio">Bio:</label><br>
                 <textarea class="form-font" id="bio" name="bio" placeholder="Who am I..."></textarea>
             </div>
-            <button class="form-font" type="submit">Done</button>
+            <button class="form-font" type="submit" title="Create user">Save</button>
         </form>
     </div>
 </body>

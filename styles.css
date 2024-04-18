@@ -27,11 +27,6 @@ button {
     justify-content: space-between; 
 }
 
-.form {
-    padding-bottom: 10px;
-    font-style: italic;
-}
-
 .form-font {
-    font-family: 'Times New Roman', Times, serif;    
+    font-family: 'Times New Roman', Times, serif;
 }
