@@ -4,24 +4,17 @@
     border: 3px solid rgb(58, 35, 157);
     background-color: rgb(131, 176, 224);
     border-radius: 8px;
-    padding-left: 10px;
+    padding: 10px;
+    /*padding-left: 10px;
     padding-bottom: 10px;
-    font-family: 'Times New Roman', Times, serif;
-
-}
-
-input::placeholder {
-    font-family: 'Times New Roman', Times, serif;
-}
-
-textarea::placeholder {
+    padding-right: 10px;*/
     font-family: 'Times New Roman', Times, serif;
 }
 
 textarea {
     width: 60%; /* Ange bredden till 100% av förälderelementet (containern) */
-    max-width: 100%; /* Begränsa maximala bredden till 100% av förälderelementet */
     height: 100px;
+    resize: none;
 }
 
 button {
@@ -34,10 +27,35 @@ button {
     justify-content: space-between; 
 }
 
-a {
-    padding-right: 10px;
+.form {
+    padding-bottom: 10px;
+    font-style: italic;
 }
 
-.form {
-    padding-bottom: 5px;
+.form-font {
+    font-family: 'Times New Roman', Times, serif;    
+}
+
+.link-with-close {
+    display: flex; /* Use flexbox to align items horizontally */
+    align-items: center; /* Center items vertically */
+  }
+  
+  .link-with-close a {
+    margin-right: 10px; /* Add some space between the link and the button */
+  }
+  
+  .close-button {
+    background-color: palegoldenrod;
+    border: 2px;
+    border-style: solid;
+    border-color: hotpink;
+    color: purple;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .close-button:active {
+    background-color: lightpink; /* Change the background color when clicked */
+    border-color: lightpink; /* Change the border color when clicked */
 }
