@@ -1,0 +1,28 @@
+{
+    "users": [
+      {
+        "id": "e321",
+        "fname": "John",
+        "lname": "Doe",
+        "username": "jonny",
+        "age": 36,
+        "bio": "What, what...."
+      },
+      {
+        "id": "1949",
+        "fname": "Jane",
+        "lname": "Doe",
+        "username": "JJ",
+        "age": 35,
+        "bio": "Gazing into the void"
+      },
+      {
+        "id": "072a",
+        "fname": "Jill",
+        "lname": "Smith",
+        "username": "Jilly",
+        "age": 26,
+        "bio": "Who am I."
+      }
+    ]
+  }
