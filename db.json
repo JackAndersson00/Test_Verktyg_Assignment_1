@@ -1,14 +1,6 @@
 {
   "users": [
     {
-      "id": "e321",
-      "fname": "John",
-      "lname": "Doe",
-      "username": "Jonny",
-      "age": 36,
-      "bio": "What, what...."
-    },
-    {
       "id": "1949",
       "fname": "Jane",
       "lname": "Doe",
@@ -17,20 +9,20 @@
       "bio": "Gazing into the void..."
     },
     {
-      "id": "eed9",
-      "fname": "Anna",
-      "lname": "Panna",
-      "username": "banana",
-      "age": 26,
-      "bio": "Lorum ipsum"
-    },
-    {
       "id": "1d04",
       "fname": "Jill",
       "lname": "Smith",
       "username": "jellybean",
       "age": 28,
       "bio": "Lorum ipsum"
+    },
+    {
+      "id": "71e0",
+      "fname": "John",
+      "lname": "Doe",
+      "username": "jonny",
+      "age": 51,
+      "bio": "What, what ..."
     }
   ]
 }
