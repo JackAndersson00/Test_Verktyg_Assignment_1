@@ -1,9 +1,6 @@
 const queryString = window.location.search;
 const params = new URLSearchParams(queryString);
 const id = params.get("id");
-console.log(queryString);
-
-console.log(id);
 
 const selectElement = document.getElementById("age");
 const form = document.getElementById("addUserForm");
@@ -22,17 +19,16 @@ async function getUser() {
     setFormValues(userInfo);
 }
 
-async function editUserInfo(id, fname, lname, username, age, bio) {
+async function editUserInfo(fname, lname, uname, age, bio) {
     const response = await fetch(`http://localhost:3000/users/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            id,
             fname,
             lname,
-            username,
+            uname,
             age,
             bio
         })
@@ -48,13 +44,12 @@ form.addEventListener("submit",  async (event) => {
 
     const fname = form.querySelector("#fname").value;
     const lname = form.querySelector("#lname").value;
-    const username = form.querySelector("#uname").value;
+    const uname = form.querySelector("#uname").value;
     const age = Number(form.querySelector("#age").value);
     const bio = form.querySelector("#bio").value;
 
-    const editedUser = await editUserInfo(id, fname, lname, username, age, bio);
-
-    window.alert(`Changes to ${editedUser.fname} ${editedUser.lname} profile have been made.`);
+    const editedUser = await editUserInfo(fname, lname, uname, age, bio);
+    console.log(editedUser);
 });
 
 selectElement.addEventListener("click", () => {
@@ -80,7 +75,7 @@ function setUserAge(user) {
 function setFormValues(user) {
     document.getElementById("fname").value = user.fname;
     document.getElementById("lname").value = user.lname;
-    document.getElementById("uname").value = user.username;
+    document.getElementById("uname").value = user.uname;
     document.getElementById("bio").value = user.bio;
 }
 

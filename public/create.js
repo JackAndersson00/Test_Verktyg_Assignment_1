@@ -33,10 +33,10 @@ form.addEventListener("submit", async (event) => {
 
     const createdUser = await createUser(fname, lname, username, age, bio);
 
-    showToast(`A new profile was created for ${createdUser.fname} ${createdUser.lname}`);
+    console.log(createUser);
 });
 
-async function createUser(fname, lname, username, age, bio) {
+async function createUser(fname, lname, uname, age, bio) {
     try {
         const response = await fetch("http://localhost:3000/users", {
             method: "POST",
@@ -46,7 +46,7 @@ async function createUser(fname, lname, username, age, bio) {
             body: JSON.stringify({
                 fname,
                 lname,
-                username,
+                uname,
                 age,
                 bio
             })

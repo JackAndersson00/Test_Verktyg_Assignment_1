@@ -1,6 +1,6 @@
 const container = document.querySelector(".container");
 
-async function getAllUSers() {
+async function getAllUsers() {
     const response = await fetch("http://localhost:3000/users");
 
     if (!response.ok) {
@@ -8,20 +8,21 @@ async function getAllUSers() {
     }
 
     const getUsers = await response.json();
+    console.log(getUsers);
 
     return getUsers;
 }
 
 async function displayAllUsers() {
-    const allUsers = await getAllUSers();
+    const allUsers = await getAllUsers();
 
     for (const user of allUsers) {
         const div = document.createElement("div");
         const a = document.createElement("a");
         const button = document.createElement("button");
-        div.setAttribute("id", `${user.id}`);
+        div.setAttribute("id", `${user.ID}`);
         div.setAttribute("class", "link-with-close");
-        a.setAttribute("href", `users.html?id=${user.id}`);
+        a.setAttribute("href", `users.html?id=${user.ID}`);
         a.textContent = `${user.fname} ${user.lname}`;
         button.setAttribute("class", "close-button");
         button.textContent = "x";
@@ -34,7 +35,6 @@ async function displayAllUsers() {
 }
 function remove() {
     const removeButton = document.querySelectorAll(".close-button");
-    console.log(removeButton);
 
     removeButton.forEach(button => {
         button.addEventListener("click", async () => {
@@ -43,6 +43,8 @@ function remove() {
         
             const removeUser = await deleteFromDB(userId);
             console.log(removeUser);
+
+            container.removeChild(parentDiv);
         });
     })
 }
@@ -59,4 +61,5 @@ async function deleteFromDB(id) {
 
     return result;
 }
+
 displayAllUsers();

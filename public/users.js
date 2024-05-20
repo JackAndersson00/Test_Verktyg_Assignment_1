@@ -14,11 +14,11 @@ async function getUser() {
         }
 
         const getUserInfo = await response.json();
-
+        console.log(getUserInfo);
         return getUserInfo;
 
     } catch(error) {
-        console.log("An error occured when creating user:", error);
+        console.error(`An error occured when creating user`);
     }
 }
 
