@@ -20,7 +20,7 @@ async function connectDB() {
 async function getAllUsers(req, res) {
   try {
     const allUsers = await logic.getUsersFromDB(connection);
-    res.json(allUsers);
+    res.status(200).json(allUsers);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error." });
@@ -33,7 +33,6 @@ async function getUserById(req, res) {
     if (isNaN(userId)) return res.status(400).json({ message: "Invalid ID format." });
 
     const  user = await logic.getUserFromDbByID(connection, userId);
-    console.log(user);
 
     if (user.length === 0) {
       return res.status(404).json({ message: "User not found." });
@@ -56,7 +55,6 @@ async function updateUser(req, res) {
     if (editUser.affectedRows === 0) {
       return res.status(404).json({ message: "User not found." });
     }
-    console.log(editUser);
 
     return res.status(200).json({ message: "Changes saved." });
   

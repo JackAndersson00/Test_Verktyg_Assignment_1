@@ -21,6 +21,4 @@ app.put("/users/:id", updateUser);
 app.post("/users", createUser);
 app.delete("/users/:id", deleteUser);
 
-app.listen(3000, function () {
-  console.log("Server started listening at localhost:3000.");
-});
+module.exports = app
