@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:unit": "jest __tests__/unit"
   },
   "dependencies": {
     "express": "^4.19.2",

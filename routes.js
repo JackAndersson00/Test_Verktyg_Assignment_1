@@ -32,7 +32,7 @@ async function getUserById(req, res) {
     const userId = parseInt(req.params.id);
     if (isNaN(userId)) return res.status(400).json({ message: "Invalid ID format." });
 
-    const [user] = await logic.getUserFromDbByID(connection, userId);
+    const  user = await logic.getUserFromDbByID(connection, userId);
 
     if (user.length === 0) {
       return res.status(404).json({ message: "User not found." });
@@ -51,16 +51,14 @@ async function updateUser(req, res) {
     if (isNaN(userId)) return res.status(400).json({ message: "Invalid ID format." });
 
     const { fname, lname, uname, age, bio } = req.body;
-    const [editUser] = await connection.query(
-      "UPDATE users SET fname = ?, lname = ?, uname = ?, age = ?, bio = ? WHERE ID = ?",
-      [fname, lname, uname, age, bio, userId]
-    );
-
+    const editUser = await logic.updateUserInDb(connection, fname, lname, uname, age, bio, userId);
     if (editUser.affectedRows === 0) {
       return res.status(404).json({ message: "User not found." });
     }
+    console.log(editUser);
 
     return res.status(200).json({ message: "Changes saved." });
+  
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Internal server error." });
@@ -74,7 +72,7 @@ async function createUser(req, res) {
       "INSERT INTO users (fname, lname, uname, age, bio) VALUES (?, ?, ?, ?, ?)",
       [fname, lname, uname, age, bio]
     );
-
+    
     if (newUser.affectedRows === 0) {
       return res.status(404).json({ message: "Could not create user." });
     }

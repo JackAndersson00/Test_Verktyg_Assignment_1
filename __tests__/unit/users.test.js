@@ -28,4 +28,17 @@ describe("Logic unit tests", function () {
         const user = await logic.getUserFromDbByID(connection, userId);
         expect(user.length > 0).toBe(true)
     })
+
+    it("should return affected.Row as 1", async function() {
+        const userId = 2;
+        const user = {
+            fname: "Jill",
+            lname: "Smith",
+            uname: "jilly",
+            age: 30,
+            bio: "Lorem ipsum"
+        };
+        const editUser = await logic.updateUserInDb(connection, user.fname, user.lname, user.uname, user.age, user.bio, userId);
+        expect(editUser.affectedRows).toBe(1);
+    })
 })

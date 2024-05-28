@@ -8,4 +8,12 @@ async function getUserFromDbByID(connection, userId) {
     return user;
 }
 
-module.exports = { getUsersFromDB, getUserFromDbByID } 
+async function updateUserInDb(connection, fname, lname, uname, age, bio, userId) {
+    const [editUser] = await connection.query(
+        "UPDATE users SET fname = ?, lname = ?, uname = ?, age = ?, bio = ? WHERE ID = ?",
+        [fname, lname, uname, age, bio, userId]
+        );
+    return editUser;
+}
+
+module.exports = { getUsersFromDB, getUserFromDbByID, updateUserInDb } 
