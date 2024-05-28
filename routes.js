@@ -32,7 +32,7 @@ async function getUserById(req, res) {
     const userId = parseInt(req.params.id);
     if (isNaN(userId)) return res.status(400).json({ message: "Invalid ID format." });
 
-    const [user] = await logic.getUserByID(connection, userId);
+    const [user] = await logic.getUserFromDbByID(connection, userId);
 
     if (user.length === 0) {
       return res.status(404).json({ message: "User not found." });

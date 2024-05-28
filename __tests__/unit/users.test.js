@@ -25,7 +25,7 @@ describe("Logic unit tests", function () {
 
     it("should return user with specified ID", async function() {
         const userId = 2;
-        const user = await logic.getUserByID(connection, userId);
+        const user = await logic.getUserFromDbByID(connection, userId);
         expect(user.length > 0).toBe(true)
     })
 })
