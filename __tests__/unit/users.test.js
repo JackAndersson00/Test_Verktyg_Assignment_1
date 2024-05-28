@@ -8,7 +8,7 @@ describe("Logic unit tests", function () {
         try {
             connection = await mysql.createConnection({
                 user: "root",
-                password: "Ho-Ke5231164",
+                password: "admin123!",
                 host: "localhost",
                 database: "users",
             });
