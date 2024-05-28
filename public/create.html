@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create User</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="util.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
+            <h1>Create User</h1>
+            <a href="index.html" title="Back to Home">Back to Users</a>
+        </div>
+        
+        <form id="addUserForm">
+            <label for="fname">First name:</label>
+            <input class="form-font" type="text" id="fname" name="fname" placeholder='"John"' required><br>
+           
+            <label for="lname">Last name:</label>
+            <input class="form-font" type="text" id="lname" name="lname" placeholder='"Doe"' required><br>
+            
+            <label for="uname">Nickname:</label>
+            <input class="form-font" type="text" id="uname" name="uname" placeholder='"Jonny"' required><br>
+            
+            <label for="age">Age:</label>
+            <select class="form-font" id="age" name="age" required>
+                <option value="placeholder" selected>Select age</option>
+            </select><br>
+            
+            <label for="bio">Bio:</label><br>
+            <textarea class="form-font" id="bio" name="bio" placeholder="Who am I..."></textarea><br>
+            
+            <button class="form-font" type="submit" title="Create user">Save</button>
+            
+        </form>
+        
+    </div>
+
+    <script src="create.js"></script>
+</body>
+</html>
