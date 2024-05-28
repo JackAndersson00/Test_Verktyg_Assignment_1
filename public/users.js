@@ -26,6 +26,10 @@ async function setUser() {
     const setUserInfo = await getUser();
 
     document.querySelector("#fname").textContent += setUserInfo.fname;
+    document.querySelector("#lname").textContent += setUserInfo.lname;
+    document.querySelector("#uname").textContent += setUserInfo.uname;
+    document.querySelector("#age").textContent += setUserInfo.age;
+    document.querySelector("#bio").textContent += setUserInfo.bio;
 }
 
 setUser();
