@@ -11,9 +11,20 @@ async function getUserFromDbByID(connection, userId) {
 async function updateUserInDb(connection, fname, lname, uname, age, bio, userId) {
     const [editUser] = await connection.query(
         "UPDATE users SET fname = ?, lname = ?, uname = ?, age = ?, bio = ? WHERE ID = ?",
-        [fname, lname, uname, age, bio, userId]
-        );
+        [fname, lname, uname, age, bio, userId]);
     return editUser;
 }
 
-module.exports = { getUsersFromDB, getUserFromDbByID, updateUserInDb } 
+async function createUserInDB(connection, fname, lname, uname, age, bio) {
+    const [newUser] = await connection.query(
+        "INSERT INTO users (fname, lname, uname, age, bio) VALUES (?, ?, ?, ?, ?)",
+        [fname, lname, uname, age, bio]);
+    return newUser;
+}
+
+async function deleteUserFromDB(connection, userId) {
+    const [deleteUser] = await connection.query("DELETE FROM users WHERE id = ?", [userId]);
+    return deleteUser;
+}
+
+module.exports = { getUsersFromDB, getUserFromDbByID, updateUserInDb, createUserInDB, deleteUserFromDB } 
