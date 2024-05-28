@@ -9,9 +9,15 @@ const container = document.getElementById("container");
 
 async function getUserById(id) {
     const response = await fetch(`http://localhost:3000/users/${id}`);
-    const userInfo = await response.json();
 
-    return userInfo;
+    const responseData = await response.json();
+    
+    if (!response.ok) {
+        showMessage(responseData.message);
+        throw new Error(responseData.message);
+    }
+
+    return responseData;
 }
 async function getUser() {
     const userInfo = await getUserById(id);
@@ -34,9 +40,16 @@ async function editUserInfo(fname, lname, uname, age, bio) {
         })
     });
 
-    const editedUser = await response.json();
+    const responseData = await response.json();
 
-    return editedUser;
+    if (!response.ok) {
+        showMessage(responseData.message);
+        throw new Error(responseData.message);
+    } else {
+        showMessage(responseData.message);
+    }
+
+    return responseData;
 }
 
 form.addEventListener("submit",  async (event) => {

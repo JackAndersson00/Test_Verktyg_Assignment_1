@@ -4,4 +4,8 @@ function showMessage(message) {
     
     responseMessageDiv.textContent = message;
     container.appendChild(responseMessageDiv);
+
+    setTimeout(() => {
+        container.removeChild(responseMessageDiv)
+    }, 3000);
 }

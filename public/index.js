@@ -58,14 +58,13 @@ async function deleteFromDB(id) {
         }
     })
 
-    const result = await response.json();
+    const responseMessage = await response.json();
 
     if (!response.ok) {
-        showMessage(result.message);
-        throw new Error(result.message);
+        showMessage(responseMessage.message);
+        throw new Error(responseMessage.message);
     } else {
-        setInterval
-        showMessage(result.message);
+        showMessage(responseMessage.message);
     }
     
     
