@@ -6,7 +6,7 @@ const {
   updateUser,
   createUser,
   deleteUser
-} = require("./logic");
+} = require("./routes");
 
 const app = express();
 
@@ -15,7 +15,7 @@ app.use(express.json());
 
 connectDB();
 
-app.get("/users", getAllUsers);
+app.get("/users", getAllUsers); //super tests (integration)
 app.get("/users/:id", getUserById);
 app.put("/users/:id", updateUser);
 app.post("/users", createUser);

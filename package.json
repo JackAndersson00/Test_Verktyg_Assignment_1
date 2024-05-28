@@ -1,7 +1,13 @@
 {
+  "scripts": {
+    "test": "jest"
+  },
   "dependencies": {
     "express": "^4.19.2",
     "json-server": "^1.0.0-alpha.23",
     "mysql2": "^3.9.7"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
