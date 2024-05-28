@@ -23,39 +23,99 @@ async function connectDB() {
 connectDB();
 
 app.get("/users", async function (req, res) {
+  try {
     const [allUsers] = await connection.query("SELECT * FROM users");
     res.json(allUsers);
+
+  } catch (error) {
+
+    console.log(error);
+    res.status(500).json({ message: "Internal server error." });
+  }
 });
 
 app.get("/users/:id", async function (req, res) {
-  const userId = req.params.id;
-  const [user] = await connection.query("SELECT * FROM users WHERE ID = ?", [userId]);
-  res.json(user[0]);
+  try {
+    const userId = parseInt(req.params.id);
+    if(isNaN(userId)) return res.status(400).json({ message: "Invalid ID format." });
+
+    const [user] = await connection.query("SELECT * FROM users WHERE ID = ?", [userId]);
+
+    if (user.length === 0) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    return res.json(user[0]);
+
+  } catch (error) {
+
+    console.log(error);
+    return res.status(500).json({ message: "Internal server error."} );
+  }
 });
 
 app.put("/users/:id", async function (req, res) {
-  const userId = req.params.id;
-  const { fname, lname, uname, age, bio } = req.body;
-  const [editUser] = await connection.query(
-    "UPDATE users SET fname = ?, lname = ?, uname = ?, age = ?, bio = ? WHERE ID = ?", 
-    [fname, lname, uname, age, bio, userId]);
-  res.json(editUser);
+  try {
+    const userId = parseInt(req.params.id);
+    if(isNaN(userId)) return res.status(400).json({ message: "Invalid ID format." });
+
+    const { fname, lname, uname, age, bio } = req.body;
+    const [editUser] = await connection.query(
+      "UPDATE users SET fname = ?, lname = ?, uname = ?, age = ?, bio = ? WHERE ID = ?", 
+      [fname, lname, uname, age, bio, userId]);
+
+    if (editUser.affectedRows === 0) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    return res.json(editUser);
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Internal server error." });
+  }
+  
 });
 
 app.post("/users", async function (req, res) {
-  const { fname, lname, uname, age, bio } = req.body;
-  const [newUser] = await connection.query(
-    "INSERT INTO users (fname, lname, uname, age, bio) VALUES (?, ?, ?, ?, ?)",
-    [fname, lname, uname, age, bio]);
-  res.json(newUser);
+  try {
+    const { fname, lname, uname, age, bio } = req.body;
+    const [newUser] = await connection.query(
+      "INSERT INTO users (fname, lname, uname, age, bio) VALUES (?, ?, ?, ?, ?)",
+      [fname, lname, uname, age, bio]);
+
+    if (newUser.affectedRows === 0) {
+      return res.status(404).json({message: "Could not create user."});
+    }
+
+    return res.status(201).json({ message: "New user created."});
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({message: "Internal server error."});
+  }
 });
 
 app.delete("/users/:id", async function(req, res) {
-  const userId = req.params.id;
-  const deleteUser = await connection.query("DELETE FROM users WHERE id = ?", [userId]);
-  res.json(deleteUser);
+  try {
+    const userId = parseInt(req.params.id);
+    if(isNaN(userId)) return res.status(400).json({ message: "Invalid ID format."});
+
+    const [deleteUser] = await connection.query("DELETE FROM users WHERE id = ?", [userId]);
+
+    if (deleteUser.affectedRows === 0) {
+      return res.status(404).json({ message: "No such user." });
+    }
+    
+    return res.status(200).json({ message: "User deleted." });
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Internal server error." });
+  }
+  
 });
 
 app.listen(3000, function () {
-    console.log("Server started at localhost:3000.");
+    console.log("Server started listening at localhost:3000.");
 })

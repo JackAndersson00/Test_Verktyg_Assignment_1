@@ -4,13 +4,14 @@ async function getAllUsers() {
     const response = await fetch("http://localhost:3000/users");
 
     if (!response.ok) {
-        throw new Error("Somthing went wrong.")
+        const errorMessage = await response.json();
+        showMessage(errorMessage.message);
+        throw new Error(response.message);
     }
 
-    const getUsers = await response.json();
-    console.log(getUsers);
-
-    return getUsers;
+    const responseMessage = await response.json();
+    
+    return responseMessage;
 }
 
 async function displayAllUsers() {
@@ -31,9 +32,10 @@ async function displayAllUsers() {
         container.appendChild(div);
     };
 
-    remove();
+    removeProfile();
 }
-function remove() {
+
+function removeProfile() {
     const removeButton = document.querySelectorAll(".close-button");
 
     removeButton.forEach(button => {
@@ -42,8 +44,7 @@ function remove() {
             const userId = parentDiv.getAttribute("id");
         
             const removeUser = await deleteFromDB(userId);
-            console.log(removeUser);
-
+            
             container.removeChild(parentDiv);
         });
     })
@@ -59,7 +60,17 @@ async function deleteFromDB(id) {
 
     const result = await response.json();
 
-    return result;
+    if (!response.ok) {
+        showMessage(result.message);
+        throw new Error(result.message);
+    } else {
+        setInterval
+        showMessage(result.message);
+    }
+    
+    
+    
+    //return result;
 }
 
 displayAllUsers();

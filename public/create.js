@@ -13,16 +13,6 @@ selectElement.addEventListener("click", (event) => {
     }
 }, { once: true });
 
-function showToast(message) {
-    const toast = document.createElement("div");
-    toast.textContent = message;
-    container.appendChild(toast);
-
-    setTimeout(() => {
-        container.removeChild(toast);
-    }, 3000);
-};
-
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const fname = form.querySelector("#fname").value;
@@ -32,35 +22,32 @@ form.addEventListener("submit", async (event) => {
     const bio = form.querySelector("#bio").value;
 
     const createdUser = await createUser(fname, lname, username, age, bio);
-
-    console.log(createUser);
 });
 
 async function createUser(fname, lname, uname, age, bio) {
-    try {
-        const response = await fetch("http://localhost:3000/users", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                fname,
-                lname,
-                uname,
-                age,
-                bio
-            })
-        });
+    
+    const response = await fetch("http://localhost:3000/users", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            fname,
+            lname,
+            uname,
+            age,
+            bio
+        })
+    });
 
-        if (!response.ok) {
-            throw new Error("Something went wrong when initalizing a new user.");
-        }
+    const responseData = await response.json();
 
-        const responseData = await response.json();
-        
-        return responseData;
-
-    } catch (error) {
-        console.error("An error occured when creating user:", error);
+    if (!response.ok) {
+        showMessage(responseData.message);
+        throw new Error(responseData.message);
+    } else {
+        showMessage(responseData.message);
     }
-}
+
+    return responseData;
+};
