@@ -3,4 +3,9 @@ async function getUsersFromDB(connection) { // unit tests
     return allUsers;
 }
 
-module.exports = { getUsersFromDB }
+async function getUserByID(connection, userId) {
+    const [user] = await connection.query("SELECT * FROM users WHERE ID = ?", [userId]);
+    return user;
+}
+
+module.exports = { getUsersFromDB, getUserByID } 

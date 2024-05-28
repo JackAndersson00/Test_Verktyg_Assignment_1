@@ -22,4 +22,10 @@ describe("Logic unit tests", function () {
         const users = await logic.getUsersFromDB(connection)
         expect(users.length > 0).toBe(true)
     })
+
+    it("should return user with specified ID", async function() {
+        const userId = 2;
+        const user = await logic.getUserByID(connection, userId);
+        expect(user.length > 0).toBe(true)
+    })
 })
