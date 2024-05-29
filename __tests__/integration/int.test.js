@@ -19,6 +19,25 @@ describe("Routes integration tests", function () {
         } catch (error) {
             console.error("Something went wrong with connecting to db", error);
         }
+
+        await connection.query("DROP TABLE IF EXISTS users");
+
+        await connection.query(`CREATE TABLE users (
+            ID int AUTO_INCREMENT PRIMARY KEY,
+            fname VARCHAR(255) NOT NULL,
+            lname VARCHAR(255) NOT NULL,
+            uname VARCHAR(255) NOT NULL,
+            age int NOT NULL,
+            bio VARCHAR(600) NOT NULL
+        )`);
+
+        await connection.query(`INSERT INTO users (fname, lname, uname, age, bio) VALUES 
+            ("Jack", "Daniels", "jackie", 65, "Smooth")`);
+    })
+
+    afterAll(async function() {
+        connection.query("DELETE FROM users");
+        connection.end();
     })
 
     it("should return all the users in the database", async function() {
@@ -28,11 +47,11 @@ describe("Routes integration tests", function () {
 
     it("should create a new user in the database, POST", async function() {
         const newUser = {
-            fname: "Jack",
-            lname: "Daniels",
-            uname: "danny",
+            fname: "Jim",
+            lname: "Beam",
+            uname: "jimmy",
             age: 65,
-            bio: "say hello"
+            bio: "beam me up"
         }; 
         const response = await request(server)
             .post("/users")
@@ -42,7 +61,7 @@ describe("Routes integration tests", function () {
     })
 
     it("should delete a user from the database, DELETE", async function() {
-        const userId = 35;
+        const userId = 1;
 
         const response = await request(server)
             .delete(`/users/${userId}`)
