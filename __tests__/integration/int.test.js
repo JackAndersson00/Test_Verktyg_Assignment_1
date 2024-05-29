@@ -1,6 +1,5 @@
 //help my soul
 const mysql = require("mysql2/promise");
-const logic = require("../../logic.js");
 const server = require("../../server.js");
 const request = require("supertest");
 
@@ -36,8 +35,8 @@ describe("Routes integration tests", function () {
     })
 
     afterAll(async function() {
-        connection.query("DELETE FROM users");
-        connection.end();
+        await connection.query("DELETE FROM users");
+        await connection.end();
     })
 
     it("should return all the users in the database", async function() {
