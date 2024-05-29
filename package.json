@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:unit": "jest __tests__/unit",
+    "test:int": "jest __tests__/integration"
   },
   "dependencies": {
     "express": "^4.19.2",
@@ -8,6 +10,7 @@
     "mysql2": "^3.9.7"
   },
   "devDependencies": {
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
   }
 }
