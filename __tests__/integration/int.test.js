@@ -41,8 +41,40 @@ describe("Routes integration tests", function () {
 
     it("should return all the users in the database", async function() {
         const response = await request(server).get("/users");
+        console.log("Response body (all users):", response.body)
         expect(response.statusCode).toBe(200);
+        expect(response.body[0].fname).toBe("Jack");
+        
     })
+
+    it("should retrun user with the specified ID", async function() {
+        const userId = 1;
+
+        const response = await request(server).get(`/users/${userId}`);
+        console.log("Response body (all users):", response.body)
+
+        expect(response.statusCode).toBe(200);
+        console.log(`First name is: ${response.body.fname}`);
+        expect(response.body.fname).toBe("Jack");
+    });
+
+    it("should return updated user info", async function() {
+        const userId = 1;
+        const newUserInfo = {
+            fname: "Jonny",
+            lname: "Daniels",
+            uname: "jackie",
+            age: 65,
+            bio: "Smooth"
+        }; 
+
+        const response = await request(server)
+            .put(`/users/${userId}`)
+            .send(newUserInfo);
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.message).toBe("Changes saved.");
+    });
 
     it("should create a new user in the database, POST", async function() {
         const newUser = {
@@ -52,6 +84,7 @@ describe("Routes integration tests", function () {
             age: 65,
             bio: "beam me up"
         }; 
+
         const response = await request(server)
             .post("/users")
             .send(newUser);
