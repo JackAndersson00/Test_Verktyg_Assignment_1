@@ -2,7 +2,9 @@
   "scripts": {
     "test": "jest",
     "test:unit": "jest __tests__/unit",
-    "test:int": "jest __tests__/integration"
+    "test:int": "jest __tests__/integration",
+    "test:e2e": "jest __tests__/e2e",
+    "start": "node app.js"
   },
   "dependencies": {
     "express": "^4.19.2",
@@ -11,6 +13,8 @@
   },
   "devDependencies": {
     "jest": "^29.7.0",
+    "regenerator-runtime": "^0.14.1",
+    "selenium-webdriver": "^4.21.0",
     "supertest": "^7.0.0"
   }
 }
