@@ -27,6 +27,7 @@ async function displayAllUsers() {
         a.setAttribute("id", `userName${user.ID}`);
         a.textContent = `${user.fname} ${user.lname}`;
         button.setAttribute("class", "close-button");
+        button.setAttribute("id", `close-button${user.ID}`);
         button.textContent = "x";
         div.appendChild(a);
         div.appendChild(button);
