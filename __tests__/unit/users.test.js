@@ -1,5 +1,7 @@
 const mysql = require("mysql2/promise");
 const logic = require("../../logic.js");
+//const { del } = require("selenium-webdriver/http.js");
+//const { create } = require("json-server");
 
 describe("Logic unit tests", function () {
     let connection = null;
@@ -59,5 +61,23 @@ describe("Logic unit tests", function () {
         };
         const editUser = await logic.updateUserInDb(connection, user.fname, user.lname, user.uname, user.age, user.bio, userId);
         expect(editUser.affectedRows).toBe(1);
+    })
+
+    it("should create user in DB", async function() {
+        const createUser = {fname: "Jill",
+                            lname: "Smith",
+                            uname: "Jilly",
+                            age: 30,
+                            bio: "Lorem ipsum"
+        };
+        const newUser = await logic.createUserInDB(connection, createUser.fname, createUser.lname, createUser.uname, createUser.age, createUser.bio);
+        expect(newUser.affectedRows).toBe(1)
+        
+    })
+
+    it("should delete user in DB",async function(){
+        const userID = 1;
+        const deletedUSer = await logic.deleteUserFromDB(connection, userID);
+        expect(deletedUSer.affectedRows).toBe(1)
     })
 })
