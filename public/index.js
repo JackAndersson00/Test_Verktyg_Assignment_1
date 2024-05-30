@@ -24,6 +24,7 @@ async function displayAllUsers() {
         div.setAttribute("id", `${user.ID}`);
         div.setAttribute("class", "link-with-close");
         a.setAttribute("href", `users.html?id=${user.ID}`);
+        a.setAttribute("id", `userName${user.ID}`);
         a.textContent = `${user.fname} ${user.lname}`;
         button.setAttribute("class", "close-button");
         button.textContent = "x";

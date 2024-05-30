@@ -1,17 +1,15 @@
 //help my soul 2 but cooler :)
 const { Builder, By, Key, until } = require("selenium-webdriver");
+const mysql = require("mysql2");
 
 describe("End-2-end test", function() {
 
     let driver;
+    
 
     beforeAll(async function() {
         driver = await new Builder().forBrowser('firefox').build();
-    });
-
-    afterAll(async function() {
-        await driver.quit();
-    });
+    })
 
     it("should reslut in a new user being created", async function() {
         await driver.get("http://localhost:3000");
@@ -25,9 +23,29 @@ describe("End-2-end test", function() {
         await driver.findElement(By.id("bio")).sendKeys("beam me up");
         await driver.findElement(By.id("submit-btn")).click();
 
-        await driver.wait(until.elementLocated(By.id("response-msg")), 5000);
         const responseMessage = await driver.findElement(By.id("response-msg")).getText();
 
         expect(responseMessage).toBe("New user created.")
     })
+
+    it("should show the all the users on the front page", async function() {
+        await driver.get("http://localhost:3000");
+        const userName = await driver.findElement(By.css("a#userName12")).getText();
+        console.log(`Result is: ${userName}`);
+
+        expect(userName.trim()).toBe("Jim Beam");
+    })
+
+    it("should result in changes being made to the user profile", async function() {
+        await driver.get("http://localhost:3000");
+        await driver.findElement(By.css("a#userName12")).click()
+        
+        await driver.findElement(By.css("textarea#bio")).sendKeys("Smooth as fuck...");
+
+        await driver.findElement(By.id("submit-btn")).click();
+
+        const responseMessage = await driver.findElement(By.id("resonse-msg")).getText();
+
+        expect(responseMessage).toBe("Changes saved.");
+    });
 })
