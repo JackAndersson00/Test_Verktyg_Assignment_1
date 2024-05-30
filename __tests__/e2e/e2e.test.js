@@ -30,7 +30,7 @@ describe("End-2-end test", function() {
 
     it("should show the all the users on the front page", async function() {
         await driver.get("http://localhost:3000");
-        const userName = await driver.findElement(By.css("a#userName12")).getText();
+        const userName = await driver.findElement(By.css("a#userName3")).getText();
         console.log(`Result is: ${userName}`);
 
         expect(userName.trim()).toBe("Jim Beam");
@@ -38,13 +38,15 @@ describe("End-2-end test", function() {
 
     it("should result in changes being made to the user profile", async function() {
         await driver.get("http://localhost:3000");
-        await driver.findElement(By.css("a#userName12")).click()
+        await driver.findElement(By.css("a#userName3")).click()
         
-        await driver.findElement(By.css("textarea#bio")).sendKeys("Smooth as fuck...");
+        await driver.findElement(By.css("a#linkToEdit")).click();
+        await driver.findElement(By.css("textarea#bio")).clear();
+        await driver.findElement(By.css("textarea#bio")).sendKeys("Beam me up, Scottie");
 
         await driver.findElement(By.id("submit-btn")).click();
 
-        const responseMessage = await driver.findElement(By.id("resonse-msg")).getText();
+        const responseMessage = await driver.findElement(By.id("response-msg")).getText();
 
         expect(responseMessage).toBe("Changes saved.");
     });
