@@ -3,7 +3,7 @@
     "mocha:unittest": "mocha tests/unit/*.js --reporter mochawesome",
     "mocha:inttest": "mocha tests/integration/*.js --reporter mochawesome",
     "mocha:e2etest": "mocha tests/e2e/*.js --reporter mochawesome",
-    "test": "jest",
+    "mocha:test": "mocha tests/*/*.js --reporter mochawesome",
     "test:unit": "jest __tests__/unit",
     "test:int": "jest __tests__/integration",
     "test:e2e": "jest __tests__/e2e",
