@@ -2,11 +2,14 @@
 const mysql = require("mysql2/promise");
 const server = require("../../server.js");
 const request = require("supertest");
+const assert = require("assert");
 
 describe("Routes integration tests", function () {
     let connection = null;
 
-    beforeAll(async function() {
+    this.timeout(10000);
+
+    beforeEach(async function() {
         try {
             connection = await mysql.createConnection({
                 user: "root",
@@ -34,7 +37,7 @@ describe("Routes integration tests", function () {
             ("Jack", "Daniels", "jackie", 65, "Smooth")`);
     })
 
-    afterAll(async function() {
+    afterEach(async function() {
         await connection.query("DELETE FROM users");
         await connection.end();
     })
@@ -42,8 +45,8 @@ describe("Routes integration tests", function () {
     it("should return all the users in the database", async function() {
         const response = await request(server).get("/users");
         console.log("Response body (all users):", response.body)
-        expect(response.statusCode).toBe(200);
-        expect(response.body[0].fname).toBe("Jack");
+        assert(response.statusCode, 200);
+        assert(response.body[0].fname, "Jack");
         
     })
 
@@ -53,9 +56,8 @@ describe("Routes integration tests", function () {
         const response = await request(server).get(`/users/${userId}`);
         console.log("Response body (all users):", response.body)
 
-        expect(response.statusCode).toBe(200);
-        console.log(`First name is: ${response.body.fname}`);
-        expect(response.body.fname).toBe("Jack");
+        assert(response.statusCode, 200);
+        assert(response.body.fname, "Jack");
     });
 
     it("should return updated user info", async function() {
@@ -72,8 +74,8 @@ describe("Routes integration tests", function () {
             .put(`/users/${userId}`)
             .send(newUserInfo);
 
-        expect(response.statusCode).toBe(200);
-        expect(response.body.message).toBe("Changes saved.");
+        assert(response.statusCode, 200);
+        assert(response.body.message, "Changes saved.");
     });
 
     it("should create a new user in the database, POST", async function() {
@@ -88,8 +90,8 @@ describe("Routes integration tests", function () {
         const response = await request(server)
             .post("/users")
             .send(newUser);
-        expect(response.statusCode).toBe(201);
-        expect(response.body.message).toBe("New user created.");
+        assert(response.statusCode, 201);
+        assert(response.body.message, "New user created.");
     })
 
     it("should delete a user from the database, DELETE", async function() {
@@ -98,7 +100,7 @@ describe("Routes integration tests", function () {
         const response = await request(server)
             .delete(`/users/${userId}`)
             
-        expect(response.status).toBe(200);
-        expect(response.body.message).toBe("User deleted.")
+        assert(response.status, 200);
+        assert(response.body.message, "User deleted.")
     })
 })

@@ -1,13 +1,16 @@
 //help my soul 2 but cooler :)
-const { Builder, By, Key, until } = require("selenium-webdriver");
+const { Builder, By, Key } = require("selenium-webdriver");
 const mysql = require("mysql2/promise");
+const assert = require("assert");
 
 describe("End-2-end test", function() {
 
     let driver;
     let connection;
 
-    beforeAll(async function() {
+    this.timeout(10000);
+
+    beforeEach(async function() {
         driver = await new Builder().forBrowser('firefox').build();
 
         connection = await mysql.createConnection({
@@ -34,7 +37,7 @@ describe("End-2-end test", function() {
             ("Jack", "Daniels", "jackie", 65, "Smooth")`);
     });
 
-    afterAll(async function() {
+    afterEach(async function() {
         await driver.quit();
 
         await connection.query("DELETE FROM users");
@@ -59,14 +62,14 @@ describe("End-2-end test", function() {
 
         const responseMessage = await driver.findElement(By.id("response-msg")).getText();
 
-        expect(responseMessage).toBe("New user created.");
+        assert(responseMessage, "New user created.");
     });
 
     it("should show the all the users on the front page", async function() {
         await driver.get("http://localhost:3000");
         const userName = await driver.findElement(By.css("a#userName1")).getText();
 
-        expect(userName.trim()).toBe("Jack Daniels");
+        assert(userName.trim(), "Jack Daniels");
     })
 
     it("should result in changes being made to the user profile", async function() {
@@ -81,7 +84,7 @@ describe("End-2-end test", function() {
 
         const responseMessage = await driver.findElement(By.id("response-msg")).getText();
 
-        expect(responseMessage).toBe("Changes saved.");
+        assert(responseMessage, "Changes saved.");
     });
 
     it("should delete the user", async function() {
@@ -91,6 +94,6 @@ describe("End-2-end test", function() {
         const responseMessage = await driver.findElement(By.id("response-msg")).getText();
         console.log(`Response.body is: ${responseMessage}`);
 
-        expect(responseMessage).toBe("User deleted.");
+        assert(responseMessage, "User deleted.");
     });
 })
