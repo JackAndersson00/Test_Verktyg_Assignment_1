@@ -1,12 +1,11 @@
 const mysql = require("mysql2/promise");
 const logic = require("../../logic.js");
-//const { del } = require("selenium-webdriver/http.js");
-//const { create } = require("json-server");
+const assert = require("assert");
 
 describe("Logic unit tests", function () {
     let connection = null;
 
-    beforeAll(async function() {
+    beforeEach(async function() {
         try {
             connection = await mysql.createConnection({
                 user: "root",
@@ -34,20 +33,20 @@ describe("Logic unit tests", function () {
             ("Jack", "Daniels", "jackie", 65, "Smooth")`);
     })
 
-    afterAll(async function() {
+    afterEach(async function() {
         await connection.query("DELETE FROM users");
         await connection.end();
     })
 
     it("should return all users from db", async function () {
         const users = await logic.getUsersFromDB(connection)
-        expect(users.length > 0).toBe(true)
+        assert(users.length > 0, true, "The users array should at least contain one entry");
     })
 
     it("should return user with specified ID", async function() {
         const userId = 1;
         const user = await logic.getUserFromDbByID(connection, userId);
-        expect(user.length > 0).toBe(true)
+        assert(user.length > 0, true, "Should return an object containing the specified user");
     })
 
     it("should return updated user info", async function() {
@@ -60,7 +59,7 @@ describe("Logic unit tests", function () {
             bio: "Lorem ipsum"
         };
         const editUser = await logic.updateUserInDb(connection, user.fname, user.lname, user.uname, user.age, user.bio, userId);
-        expect(editUser.affectedRows).toBe(1);
+        assert(editUser.affectedRows, 1);
     })
 
     it("should create user in DB", async function() {
@@ -71,13 +70,13 @@ describe("Logic unit tests", function () {
                             bio: "Lorem ipsum"
         };
         const newUser = await logic.createUserInDB(connection, createUser.fname, createUser.lname, createUser.uname, createUser.age, createUser.bio);
-        expect(newUser.affectedRows).toBe(1)
+        assert(newUser.affectedRows, 1);
         
     })
 
     it("should delete user in DB",async function(){
         const userID = 1;
         const deletedUSer = await logic.deleteUserFromDB(connection, userID);
-        expect(deletedUSer.affectedRows).toBe(1)
+        assert(deletedUSer.affectedRows, 1);
     })
 })
