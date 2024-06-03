@@ -18,7 +18,7 @@ I detta projekt har vi byggt en enkel webbapplikation med HTML, CSS och JavaScri
 6. Öppna filen `routes.js`.
     - Ändra `username` och `password` på rad 9 och 10 till dina egna uppgifter.
 7. I alla testfiler i mapparna `__tests__` och `tests`:
-    - Ändra `username` och `password` i till dina egna uppgifter creatConnection-funktionen.
+    - Ändra `username` och `password` till dina egna uppgifter i creatConnection-funktionen.
 8. Kör `npm run test:unit` för enhetstester.
 9. Kör `npm run test:int` för integrationstester.
 10. Kör `npm run test:e2e` för end-2-end-tester
