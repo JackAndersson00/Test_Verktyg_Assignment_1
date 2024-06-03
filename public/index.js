@@ -68,10 +68,6 @@ async function deleteFromDB(id) {
     } else {
         showMessage(responseMessage.message);
     }
-    
-    
-    
-    //return result;
 }
 
 displayAllUsers();
